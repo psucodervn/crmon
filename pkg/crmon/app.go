@@ -111,7 +111,7 @@ func (a *app) monitor(ctx context.Context, sub *pubsub.Subscription) (err error)
 		}
 
 		// temporary disable for testing
-		// msg.Ack()
+		msg.Ack()
 	})
 	return err
 }

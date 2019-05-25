@@ -22,8 +22,8 @@ func (s *consoleSubscriber) Name() string {
 func (s *consoleSubscriber) OnReceive(event crmon.Event) error {
 	s.logger.Info().
 		Str("action", event.Action).
-		Str("digest", event.Digest).
 		Str("tag", event.Tag).
+		Str("digest", event.Digest).
 		Msg("new image updates")
 	return nil
 }
