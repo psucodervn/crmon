@@ -9,6 +9,7 @@ Monitoring for new image updates in Google Container Registry.
   - [x] [Print to console](#print-to-console)
   - [x] [Send message to Slack](#send-message-to-slack)
   - [ ] Send message to Mattermost
+  - [ ] Pull image and update docker container
   - [ ] Run a shell command
   - [ ] ...
 
