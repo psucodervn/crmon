@@ -9,6 +9,16 @@ type consoleSubscriber struct {
 	logger log.ZeroLogger
 }
 
+func (s *consoleSubscriber) Init() error {
+	s.logger.Info().Msg(s.Name() + " ready to subscribe")
+	return nil
+}
+
+func (s *consoleSubscriber) Cleanup() error {
+	s.logger.Info().Msg(s.Name() + " cleaned up")
+	return nil
+}
+
 func NewConsoleSubscriber() crmon.Subscriber {
 	return &consoleSubscriber{
 		logger: log.NewZeroLogger(),

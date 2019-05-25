@@ -4,6 +4,23 @@ Container Registry Monitor
 ## Description
 
 Monitoring for new image updates in Google Container Registry.
+Can be use as a standalone app or import as a library.
+You can write your own subscriber that implements `Subscriber` interface to deal with new events.
+
+```golang
+type Event struct {
+  Action string `json:"action"`
+  Tag    string `json:"tag"`
+  Digest string `json:"digest"`
+}
+
+type Subscriber interface {
+  Name() string
+  Init() error
+  Cleanup() error
+  OnReceive(event Event) error
+}
+```
 
 ## Features:
   - [x] [Print to console](#print-to-console)

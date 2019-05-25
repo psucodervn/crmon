@@ -2,11 +2,23 @@ package subscribers
 
 import (
 	"crmon/pkg/crmon"
+	"crmon/pkg/log"
 	"github.com/ashwanthkumar/slack-go-webhook"
 )
 
 type slackSubscriber struct {
 	webHookURL string
+	logger     *log.ZeroLogger
+}
+
+func (s *slackSubscriber) Init() error {
+	s.logger.Info().Msg(s.Name() + " ready to subscribe")
+	return nil
+}
+
+func (s *slackSubscriber) Cleanup() error {
+	s.logger.Info().Msg(s.Name() + " cleaned up")
+	return nil
 }
 
 func (s *slackSubscriber) Name() string {

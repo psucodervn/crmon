@@ -6,6 +6,8 @@ type App interface {
 
 type Subscriber interface {
 	Name() string
+	Init() error
+	Cleanup() error
 	OnReceive(event Event) error
 }
 
