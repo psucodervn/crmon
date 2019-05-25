@@ -15,9 +15,10 @@ var (
 	version string
 	build   string
 
-	projectID    string
-	topic        string
-	subscription string
+	projectID       string
+	topic           string
+	subscription    string
+	slackWebHookURL string
 )
 
 func init() {
@@ -40,19 +41,24 @@ func main() {
 		cli.StringFlag{Name: "project-id, p", Destination: &projectID},
 		cli.StringFlag{Name: "topic, t", Destination: &topic, Value: "gcr"},
 		cli.StringFlag{Name: "subscription, s", Destination: &subscription, Value: "gcr"},
+		cli.StringFlag{Name: "slack-web-hook, w", Destination: &slackWebHookURL},
 	}
 
 	app.Action = func(c *cli.Context) error {
 		if projectID == "" {
 			return errors.New("projectID was required, but not provided")
 		}
+		subs := []crmon.Subscriber{
+			subscribers.NewConsoleSubscriber(),
+		}
+		if slackWebHookURL != "" {
+			subs = append(subs, subscribers.NewSlackSubscriber(slackWebHookURL))
+		}
 		crApp := crmon.NewApp(crmon.Options{
 			ProjectID:    projectID,
 			Topic:        topic,
 			Subscription: subscription,
-			Subscribers: []crmon.Subscriber{
-				subscribers.NewConsoleSubscriber(),
-			},
+			Subscribers:  subs,
 		})
 		return crApp.Run()
 	}
