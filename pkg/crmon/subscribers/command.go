@@ -33,13 +33,14 @@ func (s *commandSubscriber) Cleanup() error {
 }
 
 func (s *commandSubscriber) OnReceive(event crmon.Event) error {
+	s.logger.Info().Msg("executing: " + strings.Join(append([]string{s.command}, s.args...), " "))
 	cmd := exec.Command(s.command, s.args...)
 	out, err := cmd.CombinedOutput()
 	if err != nil {
 		s.logger.Error().Err(err).Msg(string(out))
 		return err
 	}
-	s.logger.Info().Msg(string(out))
+	s.logger.Info().Msg("execute succeed:\n" + strings.TrimSpace(string(out)))
 	return nil
 }
 

@@ -42,15 +42,19 @@ func main() {
 	app.Flags = []cli.Flag{
 		cli.StringFlag{Name: "project-id, p", Destination: &projectID},
 		cli.StringFlag{Name: "topic, t", Destination: &topic, Value: "gcr"},
-		cli.StringFlag{Name: "subscription, s", Destination: &subscription, Value: "gcr"},
+		cli.StringFlag{Name: "subscription, s", Destination: &subscription},
 		cli.StringFlag{Name: "slack-web-hook, w", Destination: &slackWebHookURL},
-		cli.StringFlag{Name: "command, c", Destination: &command, Value: "sh ./scripts/echo.sh"},
+		cli.StringFlag{Name: "command, c", Destination: &command},
 	}
 
 	app.Action = func(c *cli.Context) error {
 		if projectID == "" {
 			return errors.New("projectID was required, but not provided")
 		}
+		if subscription == "" {
+			return errors.New("subscription was required, but not provided")
+		}
+
 		subs := []crmon.Subscriber{
 			subscribers.NewConsoleSubscriber(),
 		}

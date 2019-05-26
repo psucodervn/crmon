@@ -1,4 +1,6 @@
 Container Registry Monitor
+[![Build Status](https://travis-ci.org/psucodervn/crmon.svg?branch=master)](https://travis-ci.org/psucodervn/crmon)
+
 =====
 
 ## Description
@@ -25,9 +27,9 @@ type Subscriber interface {
 ## Features:
   - [x] [Print to console](#print-to-console)
   - [x] [Send message to Slack](#send-message-to-slack)
+  - [x] Run a shell command
   - [ ] Send message to Mattermost
   - [ ] Pull image and update docker container
-  - [ ] Run a shell command
   - [ ] ...
 
 ## Examples
