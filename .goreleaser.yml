@@ -13,6 +13,8 @@ builds:
     - -s -w -X main.version={{.Version}} -X main.build={{.ShortCommit}} -X main.date={{.Date}}
   env:
   - CGO_ENABLED=0
+  goarch:
+    - amd64
 archives:
 - replacements:
     darwin: Darwin
