@@ -15,6 +15,10 @@ builds:
   - CGO_ENABLED=0
   goarch:
     - amd64
+dockers:
+- image_templates:
+  - psucoder/crmon:latest
+  - psucoder/crmon:{{ .Tag }}
 archives:
 - replacements:
     darwin: Darwin
