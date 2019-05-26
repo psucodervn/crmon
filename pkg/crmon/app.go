@@ -86,6 +86,19 @@ func (a *app) ensureSubscription(ctx context.Context, client *pubsub.Client, top
 }
 
 func (a *app) monitor(ctx context.Context, sub *pubsub.Subscription) (err error) {
+	for _, s := range a.subscribers {
+		if err = s.Init(); err != nil {
+			a.logger.Warn().Msg("cannot init " + s.Name() + " subscriber")
+		}
+	}
+	defer func() {
+		for _, s := range a.subscribers {
+			if err = s.Cleanup(); err != nil {
+				a.logger.Warn().Msg("cannot init " + s.Name() + " subscriber")
+			}
+		}
+	}()
+
 	a.logger.Info().
 		Str("subscription", sub.ID()).
 		Msg("listening for new image updates")
@@ -111,7 +124,7 @@ func (a *app) monitor(ctx context.Context, sub *pubsub.Subscription) (err error)
 		}
 
 		// temporary disable for testing
-		msg.Ack()
+		// msg.Ack()
 	})
 	return err
 }

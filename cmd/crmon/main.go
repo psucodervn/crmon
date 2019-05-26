@@ -14,11 +14,13 @@ var (
 	logger  log.ZeroLogger
 	version string
 	build   string
+	date    string
 
 	projectID       string
 	topic           string
 	subscription    string
 	slackWebHookURL string
+	command         string
 )
 
 func init() {
@@ -27,7 +29,7 @@ func init() {
 
 func main() {
 	cli.VersionPrinter = func(c *cli.Context) {
-		fmt.Printf("%s version %s, build %s\n", c.App.Name, c.App.Version, build)
+		fmt.Printf("%s version %s, build %s\n at %s", c.App.Name, c.App.Version, build, date)
 	}
 
 	app := cli.NewApp()
@@ -42,6 +44,7 @@ func main() {
 		cli.StringFlag{Name: "topic, t", Destination: &topic, Value: "gcr"},
 		cli.StringFlag{Name: "subscription, s", Destination: &subscription, Value: "gcr"},
 		cli.StringFlag{Name: "slack-web-hook, w", Destination: &slackWebHookURL},
+		cli.StringFlag{Name: "command, c", Destination: &command, Value: "sh ./scripts/echo.sh"},
 	}
 
 	app.Action = func(c *cli.Context) error {
@@ -52,7 +55,10 @@ func main() {
 			subscribers.NewConsoleSubscriber(),
 		}
 		if slackWebHookURL != "" {
-			subs = append(subs, subscribers.NewSlackSubscriber(slackWebHookURL))
+			// subs = append(subs, subscribers.NewSlackSubscriber(slackWebHookURL))
+		}
+		if command != "" {
+			subs = append(subs, subscribers.NewCommandSubscriber(command))
 		}
 		crApp := crmon.NewApp(crmon.Options{
 			ProjectID:    projectID,
