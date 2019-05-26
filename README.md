@@ -1,7 +1,7 @@
 Container Registry Monitor
 [![Build Status](https://travis-ci.org/psucodervn/crmon.svg?branch=master)](https://travis-ci.org/psucodervn/crmon)
 
-=====
+----------
 
 ## Description
 
