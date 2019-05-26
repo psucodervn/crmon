@@ -4,6 +4,10 @@ language: go
 go:
   - "1.12"
 
+cache:
+  directories:
+    - /home/travis/gopath/pkg/mod
+
 env:
   - GO111MODULE=on
 
@@ -23,5 +27,4 @@ deploy:
   - provider: script
     script: curl -sL https://git.io/goreleaser | bash
     on:
-      tags: true
       condition: $TRAVIS_OS_NAME = linux
