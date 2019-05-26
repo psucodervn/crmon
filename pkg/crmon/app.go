@@ -6,6 +6,7 @@ import (
 	"crmon/pkg/log"
 	"encoding/json"
 	"github.com/pkg/errors"
+	"os"
 )
 
 type app struct {
@@ -124,7 +125,10 @@ func (a *app) monitor(ctx context.Context, sub *pubsub.Subscription) (err error)
 		}
 
 		// temporary disable for testing
-		// msg.Ack()
+		if os.Getenv("CRMON_TESTING") != "" {
+			return
+		}
+		msg.Ack()
 	})
 	return err
 }

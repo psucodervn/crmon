@@ -13,4 +13,5 @@ require (
 	github.com/rs/zerolog v1.14.3
 	github.com/smartystreets/goconvey v0.0.0-20190330032615-68dc04aab96a // indirect
 	github.com/urfave/cli v1.20.0
+	golang.org/x/sync v0.0.0-20190423024810-112230192c58
 )
