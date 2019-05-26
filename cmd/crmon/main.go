@@ -29,7 +29,7 @@ func init() {
 
 func main() {
 	cli.VersionPrinter = func(c *cli.Context) {
-		fmt.Printf("%s version %s, build %s\n at %s", c.App.Name, c.App.Version, build, date)
+		fmt.Printf("%s version %s, build %s at %s\n", c.App.Name, c.App.Version, build, date)
 	}
 
 	app := cli.NewApp()
