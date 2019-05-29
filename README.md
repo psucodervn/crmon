@@ -25,10 +25,9 @@ type Subscriber interface {
 ```
 
 ## Features:
-  - [x] [Print to console](#print-to-console)
+  - [x] [Run a shell script](#run-a-shell-script)
   - [x] [Send message to Slack](#send-message-to-slack)
-  - [x] Run a shell command
-  - [ ] Send message to Mattermost
+  - [x] [Send message to Mattermost](#send-message-to-mattermost)
   - [ ] Pull image and update docker container
   - [ ] ...
 
@@ -37,5 +36,11 @@ type Subscriber interface {
 ### Print to console
 ![Print to console](/docs/console.png)
 
+### Run a shell script
+![Run a shell script](/docs/shell.png)
+
 ### Send message to Slack
 ![Send message to Slack](/docs/slack.png)
+
+### Send message to Mattermost
+![Send message to Mattermost](/docs/mattermost.png)

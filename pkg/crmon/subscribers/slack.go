@@ -8,7 +8,7 @@ import (
 
 type slackSubscriber struct {
 	webHookURL string
-	logger     *log.ZeroLogger
+	logger     log.ZeroLogger
 }
 
 func (s *slackSubscriber) Init() error {
@@ -55,5 +55,6 @@ func (s *slackSubscriber) OnReceive(event crmon.Event) error {
 func NewSlackSubscriber(webHookURL string) crmon.Subscriber {
 	return &slackSubscriber{
 		webHookURL: webHookURL,
+		logger:     log.NewZeroLogger(),
 	}
 }

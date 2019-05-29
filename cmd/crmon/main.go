@@ -16,11 +16,12 @@ var (
 	build   string
 	date    string
 
-	projectID       string
-	topic           string
-	subscription    string
-	slackWebHookURL string
-	command         string
+	projectID            string
+	topic                string
+	subscription         string
+	slackWebHookURL      string
+	command              string
+	mattermostWebHookURL string
 )
 
 func init() {
@@ -45,6 +46,7 @@ func main() {
 		cli.StringFlag{Name: "subscription, s", Destination: &subscription},
 		cli.StringFlag{Name: "slack-web-hook, w", Destination: &slackWebHookURL},
 		cli.StringFlag{Name: "command, c", Destination: &command},
+		cli.StringFlag{Name: "mattermost-web-hook, m", Destination: &mattermostWebHookURL},
 	}
 
 	app.Action = func(c *cli.Context) error {
@@ -59,7 +61,10 @@ func main() {
 			subscribers.NewConsoleSubscriber(),
 		}
 		if slackWebHookURL != "" {
-			// subs = append(subs, subscribers.NewSlackSubscriber(slackWebHookURL))
+			subs = append(subs, subscribers.NewSlackSubscriber(slackWebHookURL))
+		}
+		if mattermostWebHookURL != "" {
+			subs = append(subs, subscribers.NewMattermostSubscriber(mattermostWebHookURL))
 		}
 		if command != "" {
 			subs = append(subs, subscribers.NewCommandSubscriber(command))
