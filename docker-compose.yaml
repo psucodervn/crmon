@@ -3,7 +3,4 @@ services:
   crmon:
     build:
       context: .
-      args:
-        VERSION: ${VERSION}
-        BUILD: ${BUILD}
     image: psucoder/crmon
